@@ -1,0 +1,37 @@
+export const stylesMui = {
+  policyHeadings: {
+    // color: "var(--2, #FFF)",
+    textAlign: "start",
+    fontFamily: "Poppins",
+    fontSize: "2.875rem",
+    fontWeight: 500,
+    lineHeight: "normal",
+    textTransform: "capitalize",
+  },
+  policyText: {
+    textAlign: "start",
+    color: "var(--6, #646464)",
+    fontFamily: "Poppins",
+    fontSize: "1.25rem",
+    fontWeight: 400,
+    lineHeight: "normal",
+    textTransform: "capitalize",
+  },
+  policySubheading: {
+    // color: "var(--2, #FFF)",
+    textAlign: "start",
+    fontFamily: "Poppins",
+    fontSize: "1.625rem",
+    fontWeight: 500,
+    lineHeight: "normal",
+    textTransform: "capitalize",
+  },
+  policyNavText: {
+    // color: "var(--2, #FFF)",
+    textAlign: "start",
+    fontFamily: "Poppins",
+    fontSize: "1.375rem",
+    fontWeight: 500,
+    lineHeight: "normal",
+  },
+};

@@ -1,0 +1,43 @@
+export const stylesMui = {
+  personCard: {
+    width: "100%",
+    display: "flex",
+    padding: "1rem 1.5rem",
+    justifyContent: "space-between",
+    alignItems: "center",
+    alignSelf: "stretch",
+    borderRadius: "0.5rem",
+    background: "rgba(255, 255, 255, 0.02)",
+  },
+  indexText: {
+    color: "var(--4, #986AEB)",
+    textAlign: "right",
+    fontFamily: "Poppins",
+    fontSize: "0.75rem",
+    fontWeight: 400,
+    lineHeight: "1rem",
+  },
+  personName: {
+    // color: "var(--2, #FFF)",
+    fontFamily: "Poppins",
+    fontSize: "0.875rem",
+    fontWeight: 400,
+    lineHeight: "1rem",
+  },
+  traderText: {
+    // color: "var(--2, #FFF)",
+    fontFamily: "Poppins",
+    fontSize: "0.75rem",
+    fontWeight: 400,
+    lineHeight: "0.75rem",
+    letterSpacing: "-0.00488rem",
+  },
+  amountText: {
+    // color: "var(--2, #FFF)",
+    textAlign: "right",
+    fontFamily: "Poppins",
+    fontSize: "0.75rem",
+    fontWeight: 500,
+    lineHeight: "1rem",
+  },
+};

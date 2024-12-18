@@ -1,0 +1,52 @@
+export const stylesMui = {
+  cardHeading: {
+    color: "#FFF",
+    fontFamily: "Poppins",
+    fontSize: "1.75rem",
+    fontWeight: 600,
+    lineHeight: "normal",
+  },
+  cardSubtext: {
+    color: "#C9C9C9",
+    fontFamily: "Poppins",
+    fontSize: "1.125rem",
+    fontWeight: 400,
+    lineHeight: "normal",
+  },
+  cardText: {
+    color: "#FFF",
+    fontFamily: "Poppins",
+    fontSize: { sm: "0.75rem", lg: "1rem" },
+    fontWeight: 400,
+    lineHeight: "normal",
+  },
+  formLabelSelect: {
+    color: "var(--2, #FFF)",
+    fontFamily: "Poppins",
+    fontSize: "0.875rem",
+    fontStyle: "normal",
+    fontHeight: 600,
+    lineHeight: "1.25rem",
+  },
+  formLabelText: {
+    color: "var(--2, #FFF)",
+    fontFamily: "Poppins",
+    fontSize: "0.75rem",
+    fontWtyle: "normal",
+    fontHeight: 400,
+    lineHeight: "1.25rem",
+  },
+  buttonForm: {
+    borderRadius: "0.3125rem",
+    background: "var(--3, #FF8F1F)",
+    boxShadow: "0px 0px 14px 0px rgba(0, 0, 0, 0.12)",
+  },
+  buttonTextForm: {
+    color: "#FFF",
+    textAlign: "center",
+    fontFamily: "Poppins",
+    fontSize: "1rem",
+    fontWeight: 500,
+    lineHeight: "normal",
+  },
+};
