@@ -1,9 +1,12 @@
 import { Box, Typography } from "@mui/material";
 import { ChangeEvent, useState } from "react";
+import useFetchDataUser from "../../hooks/useFetchDataUser";
 const AccountTab = () => {
   const [previewImage, setPreviewImage] = useState<string>(
     "/Icons/profileMain.svg"
   );
+ 
+  const { data } = useFetchDataUser();
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -72,6 +75,7 @@ const AccountTab = () => {
         <input
           placeholder="Enter name"
           className="w-full placeholder:text-[#ACACAC] bg-transparent border-2 my-3 rounded-[9px] text-base h-12 border-gray-400 px-3"
+          value={data?.firstName + " " + data?.lastName}
         />
         <label className="font-semibold text-base text-white md:text-lg mt-8">
           Email<span className="text-red-500">*</span>
@@ -79,6 +83,7 @@ const AccountTab = () => {
         <input
           placeholder="Enter email"
           className="w-full placeholder:text-[#ACACAC] bg-transparent border-2 my-3 rounded-[9px] text-base h-12 border-gray-400 px-3"
+          value={data?.email}
         />
       </div>
 
