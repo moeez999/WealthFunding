@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { Typography } from "@mui/material";
+import useFetchDataUser from "../../hooks/useFetchDataUser";
+import useSetPassword from "../../hooks/useSetPassword";
 
 const UpdatePasswordTab = () => {
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { data } = useFetchDataUser();
+  const [userId, setUserId] = useState<string>("");
   const [errors, setErrors] = useState({
     oldPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
+  const { mutate, isLoading, isError, isSuccess, error } = useSetPassword();
 
   const handleInputChange = (e, field) => {
     const value = e.target.value;
@@ -25,7 +30,7 @@ const UpdatePasswordTab = () => {
   const handleResetPassword = () => {
     // Basic validation
     const newErrors = {
-      oldPassword: oldPassword === "" ? "Old Password is required." : "",
+      oldPassword: oldPassword === "" ? "Old Password is required." : oldPassword!==sessionStorage.getItem("pass") ? "Incorrect password" : "",
       newPassword:
         newPassword === ""
           ? "New Password is required."
@@ -44,10 +49,21 @@ const UpdatePasswordTab = () => {
 
     // If there are no errors, proceed with resetting the password
     if (Object.values(newErrors).every((error) => error === "")) {
+      setUserId(data?.id);
       // Your logic to reset the password goes here
-      console.log("Password reset logic");
-    }
+      mutate(
+        { userId, password: newPassword },
+        {
+          onSuccess: () => {
+            console.log("Mot de passe défini avec succès !");
+          },
+          onError: (err) => {
+            console.error("Erreur lors de la définition du mot de passe :", err);
+          },
+        }
+      );
   };
+}
 
   return (
     <div className="flex flex-col gap-3 mt-4 lg:flex-row">

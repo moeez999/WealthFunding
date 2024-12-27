@@ -58,6 +58,7 @@ const AuthLogin = () => {
               localStorage.setItem("token", res.data.accessToken); 
               localStorage.setItem("islogin", true);  
               localStorage.setItem("user", values.email);
+              sessionStorage.setItem("pass", values.password);
             },
             onError: (error) => {
               setStatus({ success: false });
