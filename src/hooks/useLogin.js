@@ -6,7 +6,7 @@ export default function useLogin() {
   return useMutation({
     mutationFn: async (data) => {
       return await axios.post(
-        "http://localhost:4000/api/users/get-user-details",
+        "http://localhost:4000/api/users/auth/token",
         data
       );
     },

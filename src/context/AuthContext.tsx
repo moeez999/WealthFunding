@@ -25,6 +25,9 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
   const logout = () => {
     console.log("Logging out...");
     setLoggedIn(false);
+    localStorage.removeItem("token");
+    localStorage.removeItem("islogin");
+    localStorage.removeItem("user");
   };
 
   const contextValue: AuthContextValue = {

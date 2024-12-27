@@ -60,6 +60,7 @@ function App() {
   useEffect(() => {
     console.log("Is logged in?", isLoggedIn);
   }, [isLoggedIn]);
+  var islogin=localStorage.getItem("islogin");
 
   return (
     <>
@@ -69,9 +70,9 @@ function App() {
           {/* {window.location.pathname.includes("/web") && <WebHeader />} */}
           {/* {isLoggedIn && window.location.pathname.includes("/web") && ( */}
           {/* {!isLoggedIn && <WebHeader />} */}
-          {!isLoggedIn && !window.location.pathname.startsWith("/auth") && (
-            <WebHeader />
-          )}
+          {!islogin ? <WebHeader /> : null}
+          
+          {!islogin && !window.location.pathname.indexOf("/auth")}
           <Routes>
             <Route path="/web/*" element={<WebRoutes />} />
             <Route

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormHelperText,
@@ -20,6 +20,7 @@ import useCreateUser from "../../hooks/useCreateUser";
 const AuthRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: createUser, isLoading } = useCreateUser();
+  const navigate = useNavigate();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -46,6 +47,7 @@ const AuthRegister = () => {
         onSuccess: () => {
           setStatus({ success: true });
           toast.success("User created successfully");
+          navigate("/auth/login");
         },
         onError: (error) => {
           setStatus({ success: false });

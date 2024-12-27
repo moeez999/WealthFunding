@@ -20,6 +20,7 @@ import { stylesMui } from "./styles";
 
 // const recaptchaKey = import.meta.env.VITE_REACT_APP_RECAPTCHA_SITE_KEY;
 
+
 const AuthLogin = () => {
   const { mutate: login, isLoading } = useLogin(); // Use the useLogin hook
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const AuthLogin = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  
 
   return (
     <Formik
@@ -51,8 +53,11 @@ const AuthLogin = () => {
       onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
         try {
           await login(values, {
-            onSuccess: () => {
+            onSuccess: (res) => {
               navigate("/"); // Navigate after successful login
+              localStorage.setItem("token", res.data.accessToken); 
+              localStorage.setItem("islogin", true);  
+              localStorage.setItem("user", values.email);
             },
             onError: (error) => {
               setStatus({ success: false });

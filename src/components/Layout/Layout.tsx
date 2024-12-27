@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
+import { useNavigate } from "react-router-dom";
 
 // import LegalIcon from "../LegalIcon";
 
@@ -14,6 +15,13 @@ interface MenuItem {
 
 export function Layout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const isLoggedIn = localStorage.getItem("islogin") === "true";
+  const navigate=useNavigate();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/web");
+    }
+  }, [isLoggedIn]);
   const menuItem: MenuItem[] = [
     {
       id: 1,
@@ -126,6 +134,9 @@ export function Layout({ children }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  if (isLoggedIn) {
+  
+
   return (
     <div className="lg:flex ">
       {/* <div className="w-full lg:w-[25%] xl:w-[20%] bg-[#212330]"> */}
@@ -149,4 +160,7 @@ export function Layout({ children }) {
       </div>
     </div>
   );
+}else{  
+  return null;
+}
 }
