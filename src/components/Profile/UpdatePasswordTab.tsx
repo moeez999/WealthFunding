@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 import useFetchDataUser from "../../hooks/useFetchDataUser";
 import useSetPassword from "../../hooks/useSetPassword";
+import { toast } from "react-toastify";
 
 const UpdatePasswordTab = () => {
   const [oldPassword, setOldPassword] = useState<string>("");
@@ -27,6 +28,17 @@ const UpdatePasswordTab = () => {
     }
   };
 
+  const resetinput=()=>{
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+  }
+
+  useEffect(() => {
+    setUserId(data?.id);
+  }, [data])
+  
+
   const handleResetPassword = () => {
     // Basic validation
     const newErrors = {
@@ -49,13 +61,15 @@ const UpdatePasswordTab = () => {
 
     // If there are no errors, proceed with resetting the password
     if (Object.values(newErrors).every((error) => error === "")) {
-      setUserId(data?.id);
+      
       // Your logic to reset the password goes here
       mutate(
         { userId, password: newPassword },
         {
           onSuccess: () => {
             console.log("Mot de passe défini avec succès !");
+            resetinput()
+            toast.success("Password updated successfully")
           },
           onError: (err) => {
             console.error("Erreur lors de la définition du mot de passe :", err);
