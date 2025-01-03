@@ -2,43 +2,46 @@ import { InputAdornment, TextField, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import HeaderSearchIcon from "../../assets/icons/HeaderSearchIcon";
 import Pagination from "../Pagination";
+import useFetchAccount from "../../hooks/useFetchAccount";
 const columns: GridColDef[] = [
   {
-    field: "openTime",
-    headerName: "Open Time",
+    field: "id",
+    headerName: "Account ID",
     width: 150,
     editable: false,
   },
   {
-    field: "openPrice",
-    headerName: "Open Price",
+    field: "accNum",
+    headerName: "Account Number",
     width: 150,
     editable: false,
   },
   {
-    field: "closePrice",
-    headerName: "Close Price",
+    field: "name",
+    headerName: "Name",
+    width: 350,
+    editable: false,
+  },
+  {
+    field: "currency",
+    headerName: "Currency",
+    width: 150,
+    editable: false,
+  },
+  
+  {
+    field: "accountBalance",
+    headerName: "Balance",
     width: 150,
     editable: false,
   },
   {
-    field: "date",
-    headerName: "Date",
+    field: "status",
+    headerName: "Status",
     width: 150,
     editable: false,
   },
-  {
-    field: "position",
-    headerName: "Position",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "symbol",
-    headerName: "Symbol",
-    width: 150,
-    editable: false,
-  },
+  /*
   {
     field: "volume",
     headerName: "Volume",
@@ -52,7 +55,7 @@ const columns: GridColDef[] = [
     type: "number",
     width: 150,
     editable: false,
-  },
+  },*/
 ];
 
 const rows = [
@@ -83,6 +86,8 @@ const rows = [
 
 const Accounts = () => {
   const theme = useTheme();
+  const {data}=useFetchAccount();
+  console.log(data);
   return (
     <>
       <div className=" rounded-[8px]">
@@ -157,7 +162,7 @@ const Accounts = () => {
             },
             ".MuiDataGrid-row": {},
           }}
-          rows={rows}
+          rows={data.accounts}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           getRowId={(row: any) => {
             return row?.id;

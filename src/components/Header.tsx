@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation, Link } from "react-router-dom";
 
 import { TextField, InputAdornment } from "@mui/material";
@@ -11,6 +11,7 @@ import { useAuth } from "../hooks/useAuth";
 import HeaderSearchIcon from "../assets/icons/HeaderSearchIcon";
 import SidebarOpen from "../assets/icons/sidebarOpen.svg";
 import SidebarClosed from "../assets/icons/sidebarClosed.svg";
+import useFetchDataUser from "../hooks/useFetchDataUser";
 
 interface MenuItem {
   id: number;
@@ -36,7 +37,17 @@ const Header: React.FC<HeaderProps> = ({
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  const { data, isLoading, error } = useFetchDataUser(); // Appel du hook personnalisé
   const { logout } = useAuth();
+
+  useEffect(() => {
+    if (data) {
+      setUserData(data); // Mettre à jour les données utilisateur
+    }
+  }, [data]); // Reagir uniquement lorsque "data" change
+  
 
   const handleMenuClick = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -205,10 +216,10 @@ const Header: React.FC<HeaderProps> = ({
                 <img src="/Images/profile.png" />
                 <div className="flex flex-col items-start">
                   <div className="text-white text-base font-medium">
-                    Joe Mann
+                    {data?.firstName} {data?.lastName}
                   </div>
                   <div className="text-white text-sm font-normal">
-                    joe@mann.com
+                    {data?.email}
                   </div>
                 </div>
                 <IconButton>
