@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import HeaderSearchIcon from "../../assets/icons/HeaderSearchIcon";
 import Pagination from "../Pagination";
 import useFetchAccount from "../../hooks/useFetchAccount";
+import { useEffect, useState } from "react";
 const columns: GridColDef[] = [
   {
     field: "id",
@@ -86,7 +87,14 @@ const rows = [
 
 const Accounts = () => {
   const theme = useTheme();
-  const {data}=useFetchAccount();
+  const [accounts, setAccounts] = useState({});
+  const {data, isLoading}=useFetchAccount();
+
+  useEffect(() => {
+    if (data) {
+      setAccounts(data.accounts); // Mettre à jour les données utilisateur
+    }
+  }, [data]); // Reagir uniquement lorsque "data" change
   console.log(data);
   return (
     <>
@@ -162,7 +170,7 @@ const Accounts = () => {
             },
             ".MuiDataGrid-row": {},
           }}
-          rows={data.accounts}
+          rows={accounts}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           getRowId={(row: any) => {
             return row?.id;
