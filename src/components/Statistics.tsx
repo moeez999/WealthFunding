@@ -2,7 +2,7 @@
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { useTheme } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OverviewTab from "./StatisticsTabs/OverviewTab";
 
 import SystemTab from "./StatisticsTabs/SystemTab";
@@ -12,6 +12,7 @@ import Orders from "./StatisticsTabs/Orders";
 
 import Positions from "./StatisticsTabs/Positions";
 import MainTitleComponent from "./MainTitleComponent";
+import useFetchAccount from "../hooks/useFetchAccount";
 const Statistics = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
@@ -27,7 +28,7 @@ const Statistics = () => {
       </div>
       <div className="flex flex-col md:flex-row justify-between items-center gap-y-6 my-8">
         <div className="flex gap-6 items-center w-full px-4 md:px-0 md:w-auto">
-          <Dropdown />
+          <Dropdown/>
         </div>
 
         {(value === 0 || value === 1 || value === 2) && (

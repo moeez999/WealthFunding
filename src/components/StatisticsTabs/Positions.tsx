@@ -1,8 +1,23 @@
 import { Typography } from "@mui/material";
 import BarChart1 from "../BarChart1";
 import BarChart2 from "../BarChart2";
+import useFetchPositions from "../../hooks/useFetchPositions";
+import { useEffect, useState } from "react";
 
 const Positions = () => {
+  const [accountId, setAccountId] = useState("1169186"); // ID du compte
+  const [accNum, setAccNum] = useState("1"); // Numéro de compte
+  const [positionData, setPositionData] = useState([]); // Données des positions
+  const { data, isLoading, error } = useFetchPositions(accountId, accNum);
+
+  useEffect(() => {
+    if (accountId !== "" && accNum !== "") {
+      // Récupérer les données des positions
+      if (data) {
+        setPositionData(data);
+      }
+    }
+  }, [accountId, accNum, data]);
   return (
     <div className="space-y-4">
       <div className="flex flex-col lg:flex-row gap-4 mt-6">

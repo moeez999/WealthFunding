@@ -1,14 +1,33 @@
 import { InputLabel, MenuItem, Select, useTheme } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import useFetchAccount from "../../hooks/useFetchAccount";
+import { useEffect, useState } from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ items }) => {
   const theme = useTheme();
-  const options: { label: string; value: string }[] = [
-    { label: "Select a date", value: "" },
-    { label: "22", value: "english" },
-    { label: "23", value: "spanish" },
-    { label: "25", value: "french" },
-  ];
+  const [accounts, setAccounts] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(""); // État pour la valeur sélectionnée
+  const { data, isLoading } = useFetchAccount();
+
+  useEffect(() => {
+    if (data) {
+      const formattedAccounts = data.accounts.map((dt) => ({
+        label: `Account ${dt.id}`,
+        value: JSON.stringify({ id: dt.id, accNum: dt.accNum }), // Formater les données
+      }));
+      setAccounts(formattedAccounts);
+
+      // Définir une valeur par défaut si les comptes existent
+      if (formattedAccounts.length > 0) {
+        setSelectedValue(formattedAccounts[0].value); // Prendre le premier élément comme valeur par défaut
+      }
+    }
+  }, [data]); // Réagit uniquement lorsque `data` change
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value); // Met à jour la valeur sélectionnée
+  };
+
   return (
     <>
       <Select
@@ -18,13 +37,11 @@ const Dropdown = () => {
             sx={{ color: theme.palette.mode === "light" ? "black" : "#DEDEDE" }}
           />
         )}
-        // name={name}
-        // value={value}
-        // onChange={onChange}
+        value={selectedValue} // Définir la valeur sélectionnée
+        onChange={handleChange} // Gestion du changement de sélection
         displayEmpty
         sx={{
           backgroundColor: "#303343",
-          // width: { xs: 250, sm: 230, lg: 270 },
           width: { xs: "100%", sm: 230, lg: 270 },
           height: 46,
           borderRadius: "12px",
@@ -43,21 +60,10 @@ const Dropdown = () => {
           },
         }}
       >
-        <InputLabel
-          sx={{
-            "& .MuiInputLabel-rootcolor": {
-              color: "white",
-              fontWeight: 400,
-              fontSize: 10,
-            },
-          }}
-          htmlFor="select-placeholder"
-          className="bg-[#212330]"
-        >
-          Account 568761
-        </InputLabel>
-        {options.map((option) => (
+        {accounts.map((option) => (
           <MenuItem
+            key={option.value}
+            value={option.value} // Associe la valeur à chaque option
             sx={{
               fontFamily: "Montserrat",
               fontWeight: 400,
@@ -74,9 +80,6 @@ const Dropdown = () => {
                 color: theme.palette.mode === "light" ? "black" : "#DEDEDE",
               },
             }}
-            className="bg-[#212330] hover:bg-[rgba(255,255,255,0.3)]"
-            key={option.value}
-            value={option.value}
           >
             {option.label}
           </MenuItem>
