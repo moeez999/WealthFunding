@@ -8,6 +8,7 @@ import HeroSection from "./HeroSection";
 import RevolutionizeSection from "./RevolutionizeSection";
 import TestSection from "./TestSection";
 import TestimonialsSection from "./TestimonialsSection";
+import WebHeader from "../WebHeader";
 
 const LandingPageComponent = () => {
   useEffect(() => {
@@ -16,6 +17,13 @@ const LandingPageComponent = () => {
 
   return (
     <section className="w-full flex flex-col">
+      <div
+        className=" w-full flex flex-col"
+        data-aos="fade-up"
+        data-aos-duration="3000"
+      >
+        <WebHeader />
+      </div>
       <div
         className="mt-[3.25rem] md:mt-[5.25rem] xl:mt-[6.25rem] w-full flex flex-col"
         data-aos="fade-up"
