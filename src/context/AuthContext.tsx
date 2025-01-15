@@ -1,4 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+<<<<<<< HEAD
+=======
+import useFetchAccount from "../hooks/useFetchAccount";
+>>>>>>> c67819895851abfaa99dd6586dd7bb07205d71bd
 
 interface AuthContextProps {
   children: ReactNode;
