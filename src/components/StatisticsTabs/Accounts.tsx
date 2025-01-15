@@ -4,23 +4,24 @@ import HeaderSearchIcon from "../../assets/icons/HeaderSearchIcon";
 import Pagination from "../Pagination";
 import useFetchAccount from "../../hooks/useFetchAccount";
 import { useEffect, useState } from "react";
+import useFetchAccountById from "../../hooks/useFetchAccountById";
 const columns: GridColDef[] = [
   {
-    field: "id",
+    field: "accountId",
     headerName: "Account ID",
     width: 150,
     editable: false,
   },
   {
-    field: "accNum",
-    headerName: "Account Number",
-    width: 150,
+    field: "accountName",
+    headerName: "Name",
+    width: 350,
     editable: false,
   },
   {
-    field: "name",
-    headerName: "Name",
-    width: 350,
+    field: "type",
+    headerName: "Type",
+    width: 150,
     editable: false,
   },
   {
@@ -31,7 +32,7 @@ const columns: GridColDef[] = [
   },
   
   {
-    field: "accountBalance",
+    field: "balance",
     headerName: "Balance",
     width: 150,
     editable: false,
@@ -88,11 +89,11 @@ const rows = [
 const Accounts = () => {
   const theme = useTheme();
   const [accounts, setAccounts] = useState({});
-  const {data, isLoading}=useFetchAccount();
+  const {data, isLoading}=useFetchAccountById();
 
   useEffect(() => {
     if (data) {
-      setAccounts(data.accounts); // Mettre à jour les données utilisateur
+      setAccounts(data.data); // Mettre à jour les données utilisateur
     }
   }, [data]); // Reagir uniquement lorsque "data" change
   console.log(data);
@@ -173,7 +174,7 @@ const Accounts = () => {
           rows={accounts}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           getRowId={(row: any) => {
-            return row?.id;
+            return row?.accountId;
           }}
           columns={columns}
           hideFooter
