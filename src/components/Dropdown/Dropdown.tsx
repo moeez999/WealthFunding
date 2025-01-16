@@ -24,10 +24,6 @@ const Dropdown = ({ items }) => {
       if (formattedAccounts.length > 0) {
         setSelectedValue(formattedAccounts[0].value); // Prendre le premier élément comme valeur par défaut
         setValueAccount(JSON.parse(formattedAccounts[0].value)); // Mettre à jour le contexte avec la valeur par défaut
-<<<<<<< HEAD
-=======
-        console.log("Selected account: ", account);
->>>>>>> c67819895851abfaa99dd6586dd7bb07205d71bd
       }
     }
   }, [data]); // Réagit uniquement lorsque `data` change
@@ -42,10 +38,7 @@ const Dropdown = ({ items }) => {
     console.log("Accounts: ", account);
     setSelectedValue(event.target.value); // Met à jour la valeur sélectionnée
     setValueAccount(JSON.parse(event.target.value)); // Mettre à jour le contexte avec la nouvelle valeur
-<<<<<<< HEAD
     console.log("Selected account: ", account);
-=======
->>>>>>> c67819895851abfaa99dd6586dd7bb07205d71bd
   };
 
   return (
